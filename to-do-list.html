@@ -1,0 +1,238 @@
+<html>
+<head>
+    <title>AngelPrime to-do List</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+        }
+
+        #container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #header {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            color: #333333;
+            padding: 10px 0;
+            border-bottom: 2px solid #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        .task-list {
+            margin-bottom: 20px;
+        }
+
+        .task-container {
+            background-color: #f7f7f7;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            min-height: 200px;
+            width: 30%;
+            float: left;
+            margin-right: 10px;
+        }
+
+        .task-container h3 {
+            font-size: 18px;
+            color: #4CAF50;
+            margin-bottom: 10px;
+            text-align: center;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .task-list:last-child {
+            width: 100%;
+            clear: both;
+        }
+
+        .todo-task {
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: grab;
+        }
+
+        .task-header {
+            font-weight: bold;
+            color: #333;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .task-date {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 8px;
+        }
+
+        .task-description {
+            font-size: 14px;
+            color: #555;
+        }
+
+        #delete-div {
+            margin-top: 20px;
+            padding: 10px;
+            text-align: center;
+            color: #ffffff;
+            background-color: #e74c3c;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #delete-div:hover {
+            background-color: #c0392b;
+        }
+
+        #todo-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #todo-form input[type="text"],
+        #todo-form textarea {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        #todo-form .btn {
+            align-self: flex-start;
+            padding: 10px 20px;
+        }
+
+        #todo-form .btn-primary {
+            background-color: #4CAF50;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #todo-form .btn-primary:hover {
+            background-color: #45a049;
+        }
+
+        input[type="button"].btn-primary {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+
+        input[type="button"].btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        /* Draggable and Droppable styling */
+        .ui-draggable {
+            transition: transform 0.3s;
+        }
+
+        .ui-draggable-dragging {
+            transform: scale(1.1);
+            opacity: 0.9;
+            z-index: 100;
+        }
+
+        /* Responsive Layout */
+        @media (max-width: 992px) {
+            #container {
+                width: 95%;
+            }
+
+            .task-container {
+                width: 48%;
+                margin-right: 0;
+                margin-bottom: 20px;
+                float: left;
+            }
+
+            .task-list:last-child {
+                width: 100%;
+                clear: both;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .task-container {
+                width: 100%;
+                float: none;
+                margin-right: 0;
+            }
+
+            #container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body class="well">
+    <div id="container">
+
+        <div id="header">To Do List</div>
+
+        <div class="task-list task-container" id="pending">
+            <h3>Pending</h3>
+            <!--<div class="todo-task">
+                <div class="task-header">Sample Header</div>
+                <div class="task-date">25/06/1992</div>
+                <div class="task-description">Lorem Ipsum Dolor Sit Amet</div>
+            </div>-->
+        </div>
+
+        <div class="task-list task-container" id="inProgress">
+            <h3>In Progress</h3>
+        </div>
+
+        <div class="task-list task-container" id="completed">
+            <h3>Completed</h3>
+        </div>
+
+        <div class="task-list">
+            <h3>Add a task</h3>
+            <form id="todo-form">
+                <input type="text" placeholder="Title" />
+                <textarea placeholder="Description"></textarea>
+                <input type="text" id="datepicker" placeholder="Due Date (dd/mm/yyyy)" />
+                <input type="button" class="btn btn-primary" value="Add Task" onclick="todo.add();" />
+            </form>
+
+            <input type="button" class="btn btn-primary" value="Clear Data" onclick="todo.clear();" />
+
+            <div id="delete-div">
+                Drag Here to Delete
+            </div>
+        </div>
+
+        <div style="clear:both;"></div>
+    </div>
+
+
+</body>
+</html>
